@@ -10,7 +10,7 @@ function readInput() {
             console.log(err);
         }
 
-        var input = data.split("\r\n");
+        let input = data.split("\r\n");
         compute(input);
     });
 }
@@ -18,8 +18,8 @@ function readInput() {
 function compute(array) {
     let howManyPasswordAreValids = 0;
 
-    for (var i = 0; i < array.length; i++) {
-        var password = formPassword(array[i]);
+    for (let i = 0; i < array.length; i++) {
+        let password = formPassword(array[i]);
 
         if (isPasswordValid2(password)) howManyPasswordAreValids++;
     }
@@ -39,7 +39,7 @@ function formPassword(string) {
 }
 
 function isPasswordValid1(password) {
-    var howManyOfTargetChar = getOccurrence(
+    let howManyOfTargetChar = getOccurrence(
         password.actualPassword,
         password.target
     );

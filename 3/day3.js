@@ -19,13 +19,13 @@ let j = 0;
 let jCounter = 0;
 let treesEncountered = 0;
 
-let slope1 = { i: 1, j: 1 };
-let slope2 = { i: 1, j: 3 };
-let slope3 = { i: 1, j: 5 };
-let slope4 = { i: 1, j: 7 };
-let slope5 = { i: 2, j: 1 };
+const slope1 = { i: 1, j: 1 };
+const slope2 = { i: 1, j: 3 };
+const slope3 = { i: 1, j: 5 };
+const slope4 = { i: 1, j: 7 };
+const slope5 = { i: 2, j: 1 };
 
-let slopes = [slope1, slope2, slope3, slope4, slope5];
+const slopes = [slope1, slope2, slope3, slope4, slope5];
 
 function compute(array) {
     let output = [];

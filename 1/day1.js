@@ -22,8 +22,8 @@ input = readInput();
 
 function find2020With2Entries(array) {
     let output = [];
-    for (var i = 0; i < array.length; i++) {
-        for (var j = i + 1; j < array.length; j++) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = i + 1; j < array.length; j++) {
             if (array[i] + array[j] == 2020) {
                 console.log(
                     `${array[i]} + ${array[j]} = ${array[i] + array[j]}`
@@ -39,9 +39,9 @@ function find2020With2Entries(array) {
 
 function find2020With3Entries(array) {
     let output = [];
-    for (var i = 0; i < array.length; i++) {
-        for (var j = i + 1; j < array.length; j++) {
-            for (var k = j + 1; k < array.length; k++) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = i + 1; j < array.length; j++) {
+            for (let k = j + 1; k < array.length; k++) {
                 if (array[i] + array[j] + array[k] == 2020) {
                     console.log(
                         `${array[i]} + ${array[j]} + ${array[k]} = ${

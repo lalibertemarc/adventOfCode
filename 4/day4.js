@@ -16,9 +16,9 @@ function readInput() {
         if (err) {
             console.log(err);
         }
-        var main = [];
-        var input = data.split("\r\n");
-        var passPort = "";
+        let main = [];
+        let input = data.split("\r\n");
+        let passPort = "";
 
         input.forEach((element) => {
             if (element != "") {
@@ -45,7 +45,7 @@ function compute(array) {
 }
 
 function isPassportValid(string) {
-    var presentFields = [];
+    let presentFields = [];
     validationRules.forEach((rule) => {
         if (isFieldPresent(string, rule)) presentFields.push(rule.name);
     });
