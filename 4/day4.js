@@ -2,8 +2,7 @@ fs = require("fs");
 
 const validationRules = [
     {
-        regex: /byr:\d*/,
-        replacer: "byr:",
+        regex: /byr:(\d*)/,
         name: "Birth year",
         digits: 4,
         min: 1920,
@@ -11,8 +10,7 @@ const validationRules = [
         validator: (string, rule) => isNumericValid(string, rule),
     },
     {
-        regex: /iyr:\d*/,
-        replacer: "iyr:",
+        regex: /iyr:(\d*)/,
         name: "Issue year",
         digits: 4,
         min: 2010,
@@ -20,8 +18,7 @@ const validationRules = [
         validator: (string, rule) => isNumericValid(string, rule),
     },
     {
-        regex: /eyr:\d*/,
-        replacer: "eyr:",
+        regex: /eyr:(\d*)/,
         name: "Expiration year",
         digits: 4,
         min: 2020,
@@ -30,7 +27,6 @@ const validationRules = [
     },
     {
         regex: /hgt:(\d*)(cm|in)/,
-        replacer: "hgt:",
         name: "Height",
         cm: { min: 150, max: 193 },
         in: { min: 59, max: 76 },
@@ -38,27 +34,23 @@ const validationRules = [
     },
     {
         regex: /hcl:#([0-9a-f]{6})/,
-        replacer: "hcl:#",
         name: "Hair Color",
         digits: 6,
         validator: (string, rule) => isStringValid(string, rule),
     },
     {
-        regex: /ecl:[a-z]*/,
-        replacer: "ecl:",
+        regex: /ecl:([a-z]*)/,
         name: "Eye color",
         validator: (string, rule) => isEyeColorValid(string, rule),
     },
     {
-        regex: /pid:\d*/,
-        replacer: "pid:",
+        regex: /pid:(\d*)/,
         name: "Passport Id",
         digits: 9,
         validator: (string, rule) => isStringValid(string, rule),
     },
     {
-        regex: /cid:\d*/,
-        replacer: "cid:",
+        regex: /cid:(\d*)/,
         name: "Country Id",
         validator: (string, rule) => isFieldPresent(string, rule),
     },
@@ -131,7 +123,7 @@ function isNumericValid(string, rule) {
     if (field == null) {
         return false;
     } else {
-        field = field[0].replace(rule.replacer, "");
+        field = field[1];
         if (field.length == rule.digits) {
             field = parseInt(field);
             return field >= rule.min && field <= rule.max;
@@ -145,7 +137,7 @@ function isStringValid(string, rule) {
     if (field == null) {
         return false;
     } else {
-        field = field[0].replace(rule.replacer, "");
+        field = field[1];
         return field.length == rule.digits;
     }
 }
@@ -155,7 +147,7 @@ function isEyeColorValid(string, rule) {
     if (field == null) {
         return false;
     } else {
-        field = field[0].replace(rule.replacer, "");
+        field = field[1];
         return allowedEyeColor.includes(field);
     }
 }
@@ -165,7 +157,7 @@ function isFieldPresent(string, rule) {
     if (field == null) {
         return false;
     } else {
-        field = field[0].replace(rule.replacer, "");
+        field = field[1];
         return field != string.empty;
     }
 }
