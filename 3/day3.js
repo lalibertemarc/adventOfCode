@@ -5,8 +5,8 @@ function readInput() {
         if (err) {
             console.log(err);
         }
-        var main = [];
-        var input = data.split("\r\n");
+        let main = [];
+        let input = data.split("\r\n");
         input.forEach((element) => {
             main.push(element.split(""));
         });
