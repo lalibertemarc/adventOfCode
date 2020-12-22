@@ -60,7 +60,7 @@ const validationRules = [
         regex: /cid:\d*/,
         replacer: "cid:",
         name: "Country Id",
-        validator: (string, rule) => isStringValid(string, rule),
+        validator: (string, rule) => isFieldPresent(string, rule),
     },
 ];
 
