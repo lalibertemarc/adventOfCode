@@ -8,6 +8,7 @@ const validationRules = [
         digits: 4,
         min: 1920,
         max: 2002,
+        validator: (string, rule) => isNumericValid(string, rule),
     },
     {
         regex: /iyr:\d*/,
@@ -16,6 +17,7 @@ const validationRules = [
         digits: 4,
         min: 2010,
         max: 2020,
+        validator: (string, rule) => isNumericValid(string, rule),
     },
     {
         regex: /eyr:\d*/,
@@ -24,6 +26,7 @@ const validationRules = [
         digits: 4,
         min: 2020,
         max: 2030,
+        validator: (string, rule) => isNumericValid(string, rule),
     },
     {
         regex: /hgt:(\d*)(cm|in)/,
@@ -31,16 +34,34 @@ const validationRules = [
         name: "Height",
         cm: { min: 150, max: 193 },
         in: { min: 59, max: 76 },
+        validator: (string, rule) => isHeightValid(string, rule),
     },
     {
         regex: /hcl:#([0-9a-f]{6})/,
         replacer: "hcl:#",
         name: "Hair Color",
         digits: 6,
+        validator: (string, rule) => isStringValid(string, rule),
     },
-    { regex: /ecl:[a-z]*/, replacer: "ecl:", name: "Eye color" },
-    { regex: /pid:\d*/, replacer: "pid:", name: "Passport Id", digits: 9 },
-    { regex: /cid:\d*/, replacer: "cid:", name: "Country Id" },
+    {
+        regex: /ecl:[a-z]*/,
+        replacer: "ecl:",
+        name: "Eye color",
+        validator: (string, rule) => isEyeColorValid(string, rule),
+    },
+    {
+        regex: /pid:\d*/,
+        replacer: "pid:",
+        name: "Passport Id",
+        digits: 9,
+        validator: (string, rule) => isStringValid(string, rule),
+    },
+    {
+        regex: /cid:\d*/,
+        replacer: "cid:",
+        name: "Country Id",
+        validator: (string, rule) => isStringValid(string, rule),
+    },
 ];
 
 const allowedEyeColor = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
@@ -81,26 +102,7 @@ function compute(array) {
 function isPassportValid2(string) {
     let presentFields = [];
     validationRules.forEach((rule) => {
-        switch (rule.name) {
-            case "Birth year":
-            case "Issue year":
-            case "Expiration year":
-                if (isNumericValid(string, rule)) presentFields.push(rule.name);
-                break;
-            case "Eye color":
-                if (isEyeColorValid(string, rule)) presentFields.push(rule.name);
-                break;
-            case "Hair Color":
-            case "Passport Id":
-                if (isStringValid(string, rule)) presentFields.push(rule.name);
-                break;
-            case "Country Id":
-                if (isFieldPresent(string, rule)) presentFields.push(rule.name);
-                break;
-            case "Height":
-                if (isHeightValid(string, rule)) presentFields.push(rule.name);
-                break;
-        }
+        if (rule.validator(string, rule)) presentFields.push(rule.name);
     });
 
     if (
