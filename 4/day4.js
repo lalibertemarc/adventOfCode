@@ -1,22 +1,14 @@
 fs = require("fs");
-const birthYearRegex = /byr:\d*/;
-const issueYearRegex = /iyr:\d*/;
-const expirationYearRegex = /eyr:\d*/;
-const heightRegex = /hgt:\d*cm|in/;
-const hairColorRegex = /hcl:.*#/;
-const eyeColorRegex = /ecl:[a-z]*/;
-const passportIdRegex = /pid:\d*/;
-const countryIdRegex = /cid:\d*/;
 
 const validationRules = [
-    { regex: birthYearRegex, replacer: "byr:", name: "Birth year" },
-    { regex: issueYearRegex, replacer: "iyr:", name: "Issue year" },
-    { regex: expirationYearRegex, replacer: "eyr:", name: "Expiration year" },
-    { regex: heightRegex, replacer: "hgt:", name: "Height" },
-    { regex: hairColorRegex, replacer: "hcl:#", name: "Hair Color" },
-    { regex: eyeColorRegex, replacer: "ecl:", name: "Eye color" },
-    { regex: passportIdRegex, replacer: "pid:", name: "Passport Id" },
-    { regex: countryIdRegex, replacer: "cid:", name: "Country Id" },
+    { regex: /byr:\d*/, replacer: "byr:", name: "Birth year" },
+    { regex: /iyr:\d*/, replacer: "iyr:", name: "Issue year" },
+    { regex: /eyr:\d*/, replacer: "eyr:", name: "Expiration year" },
+    { regex: /hgt:\d*/, replacer: "hgt:", name: "Height" },
+    { regex: /hcl:.*/, replacer: "hcl:#", name: "Hair Color" },
+    { regex: /ecl:[a-z]*/, replacer: "ecl:", name: "Eye color" },
+    { regex: /pid:\d*/, replacer: "pid:", name: "Passport Id" },
+    { regex: /cid:\d*/, replacer: "cid:", name: "Country Id" },
 ];
 
 function readInput() {
@@ -48,6 +40,7 @@ function compute(array) {
     array.forEach((element) => {
         if (isPassportValid(element)) numberOfValidPassports++;
     });
+
     console.log(`We have ${numberOfValidPassports} valid passports`);
 }
 
@@ -57,16 +50,15 @@ function isPassportValid(string) {
         if (isFieldPresent(string, rule)) presentFields.push(rule.name);
     });
 
-    if (presentFields.length == validationRules.length) return true;
-    else if (
-        presentFields.length == validationRules.length - 1 &&
-        !presentFields.includes("Country Id")
-    ) {
+    if (
+        presentFields.length == validationRules.length ||
+        (presentFields.length == validationRules.length - 1 &&
+            !presentFields.includes("Country Id"))
+    )
         return true;
-    }
 
-    console.log(`${string} is invalid`);
-    console.log(presentFields);
+    // console.log(`${string} is invalid`);
+    // console.log(presentFields);
     return false;
 }
 
