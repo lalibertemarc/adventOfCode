@@ -32,9 +32,7 @@ function compute(array) {
     let k = 0;
     slopes.forEach((slope) => {
         while (i < array.length) {
-            if (array[i][j] == "#") {
-                treesEncountered++;
-            }
+            if (array[i][j] == "#") treesEncountered++;
             adjustCoords(array[0], slope);
         }
         console.log(`For Slope ${++k}, we have ${treesEncountered} trees`);
