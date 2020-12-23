@@ -1,5 +1,3 @@
-const { syncBuiltinESMExports } = require("module");
-
 handlers = {
     F: {
         execute: (int1, int2) => {
@@ -62,8 +60,20 @@ function calculateId(row, column) {
     return row * 8 + column;
 }
 
+function comparer() {
+    return function (a, b) {
+        if (a.id > b.id) {
+            return 1;
+        } else if (a.id < b.id) {
+            return -1;
+        }
+        return 0;
+    };
+}
+
 module.exports = {
     handlers: handlers,
     formId: formId,
     calculateId: calculateId,
+    comparer: comparer,
 };
