@@ -54,11 +54,16 @@ function formId(string) {
     });
 
     output.column = start2.answer;
-    output.id = output.row * 8 + output.column;
+    output.id = calculateId(output.row, output.column);
     return output;
+}
+
+function calculateId(row, column) {
+    return row * 8 + column;
 }
 
 module.exports = {
     handlers: handlers,
     formId: formId,
+    calculateId: calculateId,
 };
