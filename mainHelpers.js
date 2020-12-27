@@ -1,6 +1,5 @@
 fs = require("fs");
 const util = require("util");
-
 const readFile = util.promisify(fs.readFile);
 
 async function readFilePath(path) {
@@ -37,7 +36,6 @@ async function readFileCombineMultiLine(path) {
         }
     });
     main.push(answer);
-    answer = "";
     return main;
 }
 
