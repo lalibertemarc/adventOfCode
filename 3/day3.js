@@ -1,4 +1,5 @@
 fs = require("fs");
+var mainHelper = require("../mainHelpers.js");
 
 function readInput() {
     fs.readFile("./input", "utf8", function (err, data) {
@@ -39,9 +40,8 @@ function compute(array) {
         output.push(treesEncountered);
         initValues();
     });
-    let Answer = 1;
-    output.forEach((element) => (Answer *= element));
-    console.log(`The Answer is ${Answer}`);
+
+    console.log(`The Answer is ${mainHelper.multiplyUpArray(output)}`);
 }
 
 function initValues() {

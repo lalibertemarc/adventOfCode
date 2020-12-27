@@ -1,31 +1,16 @@
-const { count } = require("console");
+var mainHelper = require("../mainHelpers.js");
 
 fs = require("fs");
 
-function readInput() {
-    fs.readFile("./input", "utf8", function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-        let main = [];
-        let input = data.split("\r\n");
-        let answer = "";
-
-        input.forEach((element) => {
-            if (element != "") {
-                answer += `${element} `;
-            } else {
-                main.push(answer);
-                answer = "";
-            }
-        });
-        main.push(answer);
-        answer = "";
-        compute(main);
-    });
+async function main() {
+    compute(await mainHelper.readFileCombineMultiLine("./input"));
 }
 
 function compute(array) {
+    getTotalOfAnsweredYes(array);
+}
+
+function getTotalOfAnsweredYes(array) {
     let answerCounter = [];
 
     array.forEach((input) => {
@@ -36,11 +21,8 @@ function compute(array) {
         }
         answerCounter.push(counter.length);
     });
-    let answer = 0;
-    answerCounter.forEach((element) => {
-        answer += element;
-    });
-    console.log(`The answer is ${answer}`);
+
+    console.log(`The answer is ${mainHelper.addUpArray(answerCounter)}`);
 }
 
-readInput();
+main();
