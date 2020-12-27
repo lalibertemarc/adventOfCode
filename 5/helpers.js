@@ -60,7 +60,7 @@ function calculateId(row, column) {
     return row * 8 + column;
 }
 
-function comparer() {
+function sortById() {
     return function (a, b) {
         if (a.id > b.id) {
             return 1;
@@ -75,5 +75,5 @@ module.exports = {
     handlers: handlers,
     formId: formId,
     calculateId: calculateId,
-    comparer: comparer,
+    sortById: sortById,
 };

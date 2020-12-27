@@ -6,7 +6,6 @@ function readInput() {
         if (err) {
             console.log(err);
         }
-        let main = [];
         let input = data.split("\r\n");
         compute(input);
     });
@@ -30,7 +29,7 @@ function getMaxId(array) {
 }
 
 function getMyId(array) {
-    array.sort(helpers.comparer());
+    array.sort(helpers.sortById());
     let startingId = 0;
     let missingSeatId = 0;
     array.forEach((element) => {
