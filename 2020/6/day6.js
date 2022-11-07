@@ -1,7 +1,4 @@
-const { clear } = require("console");
 var mainHelper = require("../mainHelpers.js");
-
-fs = require("fs");
 
 async function main() {
     compute(await mainHelper.readFileCombineMultiLine("./input"));

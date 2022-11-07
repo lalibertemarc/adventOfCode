@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    
+  },
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "main": "mainHelpers.js",
+  "scripts": {
+    "2021day2": "ts-node ./2021/day2/day2",
+    "2021day3": "ts-node ./2021/day3/day3"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
