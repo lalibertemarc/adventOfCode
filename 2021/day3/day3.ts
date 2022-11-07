@@ -40,4 +40,4 @@ console.log(ratesScanner);
 rates.epsilon = bin2Dec(ratesScanner.epsilon);
 rates.gamma = bin2Dec(ratesScanner.gamma);
 console.log(rates);
-console.log('answer', rates.epsilon*rates.gamma)
+console.log("answer", rates.epsilon * rates.gamma);
