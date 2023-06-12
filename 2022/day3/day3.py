@@ -18,24 +18,25 @@ def getbothstring(value):
 
 
 def stringIntersection(string1, string2):
-    res = ""
-    for i in string1:
-        if i in string2 and not i in res:
-            res += i
-    return res
+    value = set(string1) & set(string2) 
+    return list(value)[0]
+
+def stringTripleIntersection(string1, string2, string3):
+    value = set(string1) & set(string2) & set(string3) 
+    return list(value)[0]
 
 def getPriority(char):
     return points.index(char)+1
 
 totalPriority = 0
+sacks = []
 for i in input:
-    splitted = getbothstring(value=i)
-    firstSack = splitted[0]
-    secondSack = splitted[1]
-    intersection = stringIntersection(firstSack, secondSack)
-    print('intersection', intersection)
-    priority = getPriority(char=intersection)
-    print('priority', priority)
-    totalPriority += priority
+    sacks.append(i)
+    if(len(sacks) == 3):
+        intersection = stringTripleIntersection(sacks[0], sacks[1], sacks[2])
+        print('intersection', intersection)
+        priority = getPriority(char=intersection)
+        totalPriority += priority
+        sacks = []
 
 print('totalPriority', totalPriority)
