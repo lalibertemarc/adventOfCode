@@ -1,3 +1,5 @@
+cheat = []
+
 class Node ():
     def __init__(self, name, isDir, size, parent=None, children=None):
         self.name = name
@@ -16,9 +18,8 @@ class Node ():
                 totalSize+=child.size;
             else:
                 totalSize+=child.getChildrenSize()
-
+        cheat.append(totalSize)
         return totalSize
-
 
 f = open("./input", "r")
 input = f.read().splitlines()
@@ -68,20 +69,35 @@ def printTree(node):
  
 
 maxSize = 100000
+# print(main.getChildrenSize())
+# def computeFirstAnswer(node):
+#     totalSize = 0;
+#     if(len(node.children)>0):
+#         for c in node.children:
+#             childSize = c.getChildrenSize()
 
-def computeAnswer(node):
-    totalSize = 0;
-    if(len(node.children)>0):
-        for c in node.children:
-            childSize = c.getChildrenSize()
-
-            if childSize < maxSize:
-                totalSize += childSize;
+#             if childSize < maxSize:
+#                 totalSize += childSize;
             
-            if(len(c.children)>0):
-                 totalSize += computeAnswer(c);
-    else:
-        return node.size
-    return totalSize;
+#             if(len(c.children)>0):
+#                  totalSize += computeFirstAnswer(c);
+#     else:
+#         return node.size
+#     return totalSize;
 
-print(computeAnswer(main))
+totalDiskSize = 70000000
+updateSize = 30000000
+
+totalFreeSize = totalDiskSize - main.getChildrenSize()
+needToFreeSize = updateSize-totalFreeSize
+
+print('do we have enough space to update?', totalFreeSize >= updateSize)
+print('totalFreeSize', totalFreeSize)
+print('needToFreeSize', needToFreeSize)
+
+cheat.sort();
+print(cheat)
+for i in range(0, len(cheat)):
+    if (cheat[i] > needToFreeSize):
+        print(cheat[i])
+
