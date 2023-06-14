@@ -2,10 +2,11 @@ cheat = []
 
 
 class Node ():
-    def __init__(self, name, isDir, size, children=None):
+    def __init__(self, name, isDir, size,parent = None, children=None):
         self.name = name
         self.isDir = isDir
         self.size = size
+        self.parent = parent
         if children:
             self.children = children
         else:
@@ -28,8 +29,6 @@ input = f.read().splitlines()
 main = Node('/', True, 0, children=[])
 currentParent = main
 
-navigation = []
-navigation.append(currentParent)
 
 for i in range(2, len(input)):
     command = input[i].split(' ')
@@ -39,36 +38,23 @@ for i in range(2, len(input)):
     if (command[0] == 'dir'):
         # new dir
         dirName = command[1]
-        newNode = Node(dirName, True, 0)
+        newNode = Node(dirName, True, 0, parent = currentParent)
         currentParent.children.append(newNode)
     elif (command[1] == 'cd' and command[2] == '..'):
         # back one dir
-        navigation.pop()
-        currentParent = navigation[-1]
+        currentParent = currentParent.parent
     elif (command[1] == 'cd' and command[2] != '..'):
         # go inside dir
         dirName = command[2]
         currentParent = next(
             (f for f in currentParent.children if f.name == dirName), None)
-        navigation.append(currentParent)
     else:
         # newFile
         fileName = command[1]
         size = command[0]
 
-        newNode = Node(fileName, False, int(size))
+        newNode = Node(fileName, False, int(size), parent=currentParent)
         currentParent.children.append(newNode)
-
-
-def printTree(node):
-    if (len(node.children) > 0):
-        print(node.name)
-        for c in node.children:
-            print('-', c.name, c.size)
-
-        for c in node.children:
-            if (c.isDir):
-                printTree(c)
 
 
 maxSize = 100000
