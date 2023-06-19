@@ -71,3 +71,57 @@ def computeFirstAnswer():
                 visibleTrees += 1
     print(visibleTrees)
 
+
+def computeSecondAnswer():
+    maximumScenicScore = 0;
+    for row in range(0, len(table)):
+        for column in range(0, len(table[row])):
+            currentTree = table[row][column]
+
+            # visible from left
+            visibleTreesOnLeft = 0
+            for left in reversed(range(0, column)):
+                if (table[row][left] < currentTree):
+                    visibleTreesOnLeft +=1 
+                if(table[row][left] >= currentTree):
+                    visibleTreesOnLeft +=1 
+                    break
+            #print(currentTree, 'visibleTreesOnLeft', visibleTreesOnLeft)
+
+             # visible from right
+            visibleTreesOnRight = 0
+            for right in range(column+1, len(table[row])):
+                if (table[row][right] < currentTree):
+                    visibleTreesOnRight +=1 
+                if(table[row][right] >= currentTree):
+                    visibleTreesOnRight +=1 
+                    break
+            #print(currentTree, 'visibleTreesOnRight', visibleTreesOnRight)
+
+             # visible from top
+            visibleTreesOnTop = 0
+            for top in reversed(range(0, row)):
+                if (table[top][column] < currentTree):
+                    visibleTreesOnTop +=1 
+                if(table[top][column] >= currentTree):
+                    visibleTreesOnTop +=1 
+                    break
+            # print(currentTree, 'visibleTreesOnTop', visibleTreesOnTop)
+
+            # visible from bottom;
+            visibleTreesOnBottom= 0
+            for bottom in range(row+1, len(table)):
+                if (table[bottom][column] < currentTree):
+                    visibleTreesOnBottom +=1 
+                if(table[bottom][column] >= currentTree):
+                    visibleTreesOnBottom +=1 
+                    break
+            #print(currentTree, 'visibleTreesOnBottom', visibleTreesOnBottom)
+
+            currentScenicScore = visibleTreesOnLeft * visibleTreesOnRight * visibleTreesOnTop * visibleTreesOnBottom
+
+            if(currentScenicScore > maximumScenicScore):
+                maximumScenicScore = currentScenicScore
+
+    print(maximumScenicScore)
+computeSecondAnswer()
